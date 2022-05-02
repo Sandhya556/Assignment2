@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: school-ws
+  boot:
+    admin:
+      client:
+        url:
+        - http://admin:admin@localhost:8761/admin
+  zipkin:
+    base-url: http://localhost:9411
+  h2:
+    console:
+      settings:
+        web-allow-others: true
+      enabled: true
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/test
+    username: sa
+    password: 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:admin@localhost:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - '*'
+server:
+  port: 0
